@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import LoginRegisterForm from './LoginRegisterForm'
 import StoryContainer from './StoryContainer'
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
   return (
     <div className="App">
       <h1>How We Met</h1>
+      <LoginRegisterForm />
       <StoryContainer />
     </div>
   );
