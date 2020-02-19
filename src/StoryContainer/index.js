@@ -47,7 +47,7 @@ class StoryContainer extends React.Component {
 		return(
 			<React.Fragment>
 			<h4>Story Container</h4>
-			<StoryList />
+			<StoryList stories={this.state.stories}/>
 			</React.Fragment>
 		)
 	}

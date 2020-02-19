@@ -76,7 +76,7 @@ class App extends Component {
       if(loginResponse.status === 200) {
         this.setState({
           loggedIn: true,
-          loggedInUserEmail: loginJson.data.username
+          loggedInUserUsername: loginJson.data.username
         })
       }
 
