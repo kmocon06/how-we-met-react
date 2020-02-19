@@ -8,7 +8,7 @@ class NewStoryForm extends Component {
 
 		this.state = {
     		title: '',
-    		story_content: '',
+    		story: '',
     		image: ''
     	}
   	}
@@ -24,17 +24,24 @@ class NewStoryForm extends Component {
       		[event.target.name]: event.target.value
     	})
 
-    	console.log(event)
+    	//console.log(event)
+  	}
+
+  	handleSubmit = (event) => {
+  		//default action shouldn't be taken, prevent default
+    	event.preventDefault()
+
+    	this.props.createStory(this.state)
   	}
 
 
   	render() {
-  		console.log(this.state);
+  		//console.log(this.state);
 
 	    return(
 	    	<div>
 	    		<h4>Add a new love story:</h4>
-	    		<form>
+	    		<form onSubmit={this.handleSubmit}>
 	        		<p>Title:</p>
 	        		<input 
 	            		type="text"
@@ -46,7 +53,7 @@ class NewStoryForm extends Component {
 	          		<input 
 	            		type="textbox"
 	            		name="story"
-	            		value={this.state.story_content}
+	            		value={this.state.story}
 	            		onChange={this.handleChange}
 	          		/>          
 	          		<p>Image:</p>

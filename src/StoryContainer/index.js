@@ -28,8 +28,8 @@ class StoryContainer extends React.Component {
 
 			//json of response
 			const storiesJson = await storiesResponse.json()
-			console.log('data from getStories() in StoryContainer')
-			console.log(storiesJson)
+			//console.log('data from getStories() in StoryContainer')
+			//console.log(storiesJson)
 
 			this.setState({
         		stories: storiesJson.data
@@ -41,6 +41,12 @@ class StoryContainer extends React.Component {
 		}
 	}
 
+	//CREATE story
+	createStory = async (newStory) => {
+		console.log('newStory in createStory() in StoryContainer')
+    	console.log(newStory);
+  }
+
 
 	render() {
 		console.log(this.state)
@@ -49,7 +55,7 @@ class StoryContainer extends React.Component {
 			<React.Fragment>
 			<h4>Story Container</h4>
 			<StoryList stories={this.state.stories}/>
-			<NewStoryForm />
+			<NewStoryForm createStory={this.createStory}/>
 			</React.Fragment>
 		)
 	}
