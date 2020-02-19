@@ -49,6 +49,32 @@ class App extends Component {
   //login user
   login = async (loginInfo) => {
     console.log("login() in App.js +", loginInfo);
+    const loginUrl = process.env.REACT_APP_API_URL + '/api/v1/users/login' 
+
+    try {
+      //get response and fetch call
+      const loginResponse = await fetch(loginUrl, {
+        credentials: 'include',
+        //POST 
+        method: 'POST',
+        //turn body into JSON
+        body: JSON.stringify(loginInfo),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      console.log(loginResponse)
+
+      //get the json from the reponse
+      const loginJson = await loginResponse.json()
+      console.log(loginJson);
+
+    } catch (err) {
+      if(err) {
+        console.error(err)
+      }
+    }
   }
 
   render() {
