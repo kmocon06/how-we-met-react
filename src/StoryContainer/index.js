@@ -1,4 +1,5 @@
 import React from 'react'
+import StoryList from '../StoryList'
 
 class StoryContainer extends React.Component {
 	constructor(props) {
@@ -46,6 +47,7 @@ class StoryContainer extends React.Component {
 		return(
 			<React.Fragment>
 			<h4>Story Container</h4>
+			<StoryList />
 			</React.Fragment>
 		)
 	}
