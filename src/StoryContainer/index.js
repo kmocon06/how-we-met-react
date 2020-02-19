@@ -1,5 +1,6 @@
 import React from 'react'
 import StoryList from '../StoryList'
+import NewStoryForm from '../NewStoryForm'
 
 class StoryContainer extends React.Component {
 	constructor(props) {
@@ -48,6 +49,7 @@ class StoryContainer extends React.Component {
 			<React.Fragment>
 			<h4>Story Container</h4>
 			<StoryList stories={this.state.stories}/>
+			<NewStoryForm />
 			</React.Fragment>
 		)
 	}
