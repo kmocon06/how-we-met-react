@@ -39,12 +39,26 @@ class LoginRegisterForm extends Component {
 
   	handleSubmit = (event) => {
     	event.preventDefault()
-    	console.log(`Handle submit with ${this.state.action}`)
+    	//console.log(`Handle submit with ${this.state.action}`)
+    	//console.log(event);
+    	this.loginOrRegister()
+  	}
+
+  	loginOrRegister = () => {
+  		//if the action is register then we should register the user
+    	if(this.state.action === "register") {
+
+      		this.props.register(this.state)
+      	//otherwise we should just be able to login
+    	} else {
+
+      		this.props.login(this.state)      
+    	}
   	}
 
 
 	render() {
-    	console.log(this.state);
+    	//console.log(this.state);
 		return(
 			<div className="LoginRegisterForm">
         		<h2 className="LoginRegisterForm-action">{this.state.action + " here"}</h2>

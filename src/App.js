@@ -15,6 +15,42 @@ class App extends Component {
     }
   }
 
+  //register user
+  register = async (registerInfo) => {
+    console.log("register() in App.js +", registerInfo);
+    const registerUrl = process.env.REACT_APP_API_URL + '/api/v1/users/register'
+
+    try {
+      //get response and fetch call
+      const registerResponse = await fetch(registerUrl, {
+        credentials: 'include', 
+        //POST 
+        method: 'POST',
+        //turn body into JSON
+        body: JSON.stringify(registerInfo),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      console.log(registerResponse)
+
+      //get the json from the reponse
+      const registerJson = await registerResponse.json()
+      console.log(registerJson)
+
+    } catch (err) {
+      if(err) {
+        console.error(err)
+      }
+    }
+  }
+
+  //login user
+  login = async (loginInfo) => {
+    console.log("login() in App.js +", loginInfo);
+  }
+
   render() {
 
     console.log(process.env);
@@ -25,7 +61,10 @@ class App extends Component {
         {
           this.state.loggedIn 
           ? <StoryContainer />
-          : <LoginRegisterForm />
+          : <LoginRegisterForm 
+            register={this.register}
+            login={this.login}
+          />
         }
       </div>
     )
