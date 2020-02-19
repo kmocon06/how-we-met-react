@@ -6,6 +6,8 @@ class LoginRegisterForm extends Component {
 		super(props)
 
 		this.state = {
+			name: '',
+			email: '',
 			username: '',
 			password: '',
 			action: 'login'
@@ -28,12 +30,25 @@ class LoginRegisterForm extends Component {
 		}
 	}
 
+	handleChange = (event) => {
+		//handles the change of each event and its value
+    	this.setState({
+      		[event.target.name]: event.target.value
+    	})
+  	}
+
+  	handleSubmit = (event) => {
+    	event.preventDefault()
+    	console.log(`Handle submit with ${this.state.action}`)
+  	}
+
 
 	render() {
+    	console.log(this.state);
 		return(
 			<div className="LoginRegisterForm">
         		<h2 className="LoginRegisterForm-action">{this.state.action + " here"}</h2>
-				<form>
+				<form onSubmit={this.handleSubmit}>
 					{
             			this.state.action === "register"
             			?
@@ -44,6 +59,7 @@ class LoginRegisterForm extends Component {
 				            	name="name"
 				                placeholder="Enter Name"
 				                value={this.state.name}
+				                onChange={this.handleChange}
 				            />
 				            </div>
 				            <div>
@@ -52,6 +68,7 @@ class LoginRegisterForm extends Component {
 				            	name="email"
 				                placeholder="Enter Email"
 				                value={this.state.email}
+				                onChange={this.handleChange}
 				            />
 				            </div>
 				        </React.Fragment>
@@ -64,6 +81,7 @@ class LoginRegisterForm extends Component {
 							name="username"
 							placeholder="Enter Username"
 							value={this.state.username}
+							onChange={this.handleChange}
 						/>
 					</div>
 					<div>
@@ -72,6 +90,7 @@ class LoginRegisterForm extends Component {
 							name="password"
 							placeholder="Enter Password"
 							value={this.state.password}
+							onChange={this.handleChange}
 						/>
 					</div>
 				<button type="Submit">{this.state.action === "register" ? "Register" : "Login"}</button>
