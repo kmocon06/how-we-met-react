@@ -1,13 +1,15 @@
 import React from 'react'
 import StoryList from '../StoryList'
 import NewStoryForm from '../NewStoryForm'
+import EditStoryModal from '../EditStoryModal'
 
 class StoryContainer extends React.Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			stories: []
+			stories: [],
+			idOfStoryToEdit: -1
 		}
 	}
 
@@ -123,6 +125,17 @@ class StoryContainer extends React.Component {
     	}
 	}
 
+	//EDIT story
+	//GET /id
+	editStory = (idOfStoryToEdit) => {
+    	console.log("id of story")
+    	console.log(idOfStoryToEdit)
+
+    	this.setState({
+      		idOfStoryToEdit: idOfStoryToEdit
+    	})
+  	}
+
 
 	render() {
 		console.log(this.state)
@@ -130,8 +143,16 @@ class StoryContainer extends React.Component {
 		return(
 			<React.Fragment>
 			<h4>Story Container</h4>
-			<StoryList stories={this.state.stories} deleteStory={this.deleteStory}/>
+			<StoryList stories={this.state.stories} 
+			deleteStory={this.deleteStory} editStory={this.editStory}/>
 			<NewStoryForm createStory={this.createStory}/>
+			 {
+          		this.state.idOfStoryToEdit !== -1 
+          		? 
+          		<EditStoryModal />
+          		:
+          		null
+        	}
 			</React.Fragment>
 		)
 	}

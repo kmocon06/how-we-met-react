@@ -9,6 +9,7 @@ function StoryList(props) {
     	   Title: {story.title} by {story.user_id.username}
         </li>
         <button onClick={() => props.deleteStory(story.id)}>Delete</button>
+        <button onClick={() => props.editStory(story.id)}>Edit</button>
         </div>
       )
   	})
