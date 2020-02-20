@@ -128,8 +128,8 @@ class StoryContainer extends React.Component {
 	//EDIT story
 	//GET /id
 	editStory = (idOfStoryToEdit) => {
-    	console.log("id of story")
-    	console.log(idOfStoryToEdit)
+    	//console.log("id of story")
+    	//console.log(idOfStoryToEdit)
 
     	this.setState({
       		idOfStoryToEdit: idOfStoryToEdit
@@ -155,17 +155,36 @@ class StoryContainer extends React.Component {
         			}
       			}
     		)
-    		console.log("response from updateStory in StoryContainer")
-    		console.log(updateStoryResponse)
+    		//console.log("response from updateStory in StoryContainer")
+    		//console.log(updateStoryResponse)
 
-    		const updateStoryJson = await updateStoryResponse.json()
-    		console.log("updateStoryJson")
-    		console.log(updateStoryJson)
+    		const updatedStoryJson = await updateStoryResponse.json()
+    		//console.log("updateStoryJson")
+    		//console.log(updateStoryJson)
+
+    		if(updateStoryResponse.status === 200) {
+        
+    			const newArrayWithUpdatedStory = this.state.stories.map((story) => {
+          			//if the story.id matches the state of the id we want to edit
+          			//then we should return the updated data
+          			if(story.id === this.state.idOfStoryToEdit) {
+            			return updatedStoryJson.data
+            		//otherwise just return the same story
+          			} else {
+            			return story
+          			}
+        		})
+        		console.log(newArrayWithUpdatedStory)
+
+        		this.setState({
+          			stories: newArrayWithUpdatedStory
+        		})
+        	}
 
     	} catch(err) {
     		console.log(err)
     	}
-	}
+    }
 
 
 	render() {
