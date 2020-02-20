@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, TextArea, Form, Modal, Header } from 'semantic-ui-react'
+import { Button, TextArea, Form, Modal, Header, Icon } from 'semantic-ui-react'
 
 class EditStoryModal extends React.Component {
 	constructor(props) {
@@ -33,13 +33,12 @@ class EditStoryModal extends React.Component {
     	this.props.updateStory(this.state)
   	}
 
-
 	render() {
 		//console.log('props in EditStoryModal')
 		//console.log(this.props)
 
 		return (
-			<Modal open={true}>
+			<Modal open={true} onClose={(e)=>{this.props.closeModal()}} closeIcon>
 	    		<Header>Edit your love story:</Header>
 	    		<Modal.Content>
 	    		<Form onSubmit={this.handleSubmit}>
@@ -66,7 +65,7 @@ class EditStoryModal extends React.Component {
 	            		onChange={this.handleChange}
 	          		/>
 	          		<Modal.Actions>
-	          		<Button type="Submit">Edit Story</Button>
+	          			<Button type="Submit">Edit Story</Button>
 	          		</Modal.Actions>
 	        	</Form>
 	        	</Modal.Content>
