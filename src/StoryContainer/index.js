@@ -77,6 +77,52 @@ class StoryContainer extends React.Component {
     	}
   	}
 
+  	//DESTROY story
+  	// delete /id
+	deleteStory = async (id) => {
+    	console.log("deleteStory() in StoryContainer")
+    	console.log(id)
+
+   		try {
+
+      		const deleteStoryResponse = await fetch(process.env.REACT_APP_API_URL + "/api/v1/stories/" + id, {
+        		credentials: 'include',
+        		method: 'DELETE'
+      		})
+
+      		const deleteStoryJson = await deleteStoryResponse.json()
+      		console.log("delete story response in json")
+      		console.log(deleteStoryJson)
+
+      		if(deleteStoryJson.status === 200) {
+	      		//we need the current state of stories
+	    		const stories = this.state.stories
+	    		//we should loop through the stories starting with index 0
+	      		let indexOfStory = 0
+
+	    		for(let i = 0; i < stories.length; i++) {
+
+	      			if(stories[i].id === id) {
+	        			indexOfStory = i
+	      			}
+	      		}
+
+	      		//get rid of the story from the array 
+	    		stories.splice(indexOfStory, 1)
+
+	      		this.setState({ 
+	      			stories: stories
+	      		})
+               
+      		} else {
+        		throw new Error("Can't delete story")
+      		}
+
+    	} catch(err) {
+      		console.error(err)
+    	}
+	}
+
 
 	render() {
 		console.log(this.state)
@@ -84,7 +130,7 @@ class StoryContainer extends React.Component {
 		return(
 			<React.Fragment>
 			<h4>Story Container</h4>
-			<StoryList stories={this.state.stories}/>
+			<StoryList stories={this.state.stories} deleteStory={this.deleteStory}/>
 			<NewStoryForm createStory={this.createStory}/>
 			</React.Fragment>
 		)

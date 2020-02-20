@@ -3,8 +3,14 @@ import React from 'react'
 function StoryList(props) {
 	//loop through all of the stories
 	const stories = props.stories.map((story) => {
-    	return <li key={story.id}>
-    	Title: {story.title} by {story.user_id.username}</li>
+    	return (
+        <div>
+        <li key={story.id}>
+    	   Title: {story.title} by {story.user_id.username}
+        </li>
+        <button onClick={() => props.deleteStory(story.id)}>Delete</button>
+        </div>
+      )
   	})
   return(
   	<div>

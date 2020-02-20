@@ -58,7 +58,7 @@ class LoginRegisterForm extends Component {
 
 
 	render() {
-    	//console.log(this.state);
+    	console.log(this.state);
 		return(
 			<div className="LoginRegisterForm">
         		<h2 className="LoginRegisterForm-action">{this.state.action + " here"}</h2>
@@ -110,14 +110,14 @@ class LoginRegisterForm extends Component {
 				<button type="Submit">{this.state.action === "register" ? "Register" : "Login"}</button>
 				</form>
 				{
-          this.state.action === "register"
-          ?
-          //register
-          <small>Already a user? Log in <span className="fake-link" onClick={this.switchForm}>here</span>.</small>
-          :
-          //login
-          <small>Not a user? Sign up <span className="fake-link" onClick={this.switchForm}>here</span>!</small>
-        }
+          		this.state.action === "register"
+          		?
+          		//register
+          		<small>Already a user? Log in <span className="fake-link" onClick={this.switchForm}>here</span>.</small>
+          		:
+          		//login
+          		<small>Not a user? Sign up <span className="fake-link" onClick={this.switchForm}>here</span>!</small>
+        		}
 			</div>
 		)
 	}
