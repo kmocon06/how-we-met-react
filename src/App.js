@@ -76,7 +76,7 @@ class App extends Component {
       if(loginResponse.status === 200) {
         this.setState({
           loggedIn: true,
-          loggedInUserUsername: loginJson.data.username
+          loggedInUsername: loginJson.data.username
         })
       }
 
@@ -90,6 +90,7 @@ class App extends Component {
   render() {
 
     console.log(process.env);
+    console.log(this.state)
 
     return (
       <div className="App">

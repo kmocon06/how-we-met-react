@@ -8,7 +8,7 @@ class NewStoryForm extends Component {
 
 		this.state = {
     		title: '',
-    		story: '',
+    		content: '',
     		image: ''
     	}
   	}
@@ -32,6 +32,13 @@ class NewStoryForm extends Component {
     	event.preventDefault()
 
     	this.props.createStory(this.state)
+
+    	//reset the state of the story
+    	this.setState({
+       		title: '',
+       		content: '', 
+       		image: ''
+    	})
   	}
 
 
@@ -51,9 +58,9 @@ class NewStoryForm extends Component {
 	          		/>
 	          		<p>Story:</p>
 	          		<input 
-	            		type="textbox"
-	            		name="story"
-	            		value={this.state.story}
+	            		type="text"
+	            		name="content"
+	            		value={this.state.content}
 	            		onChange={this.handleChange}
 	          		/>          
 	          		<p>Image:</p>

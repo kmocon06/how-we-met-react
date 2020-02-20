@@ -42,10 +42,40 @@ class StoryContainer extends React.Component {
 	}
 
 	//CREATE story
+	//POST
 	createStory = async (newStory) => {
 		console.log('newStory in createStory() in StoryContainer')
     	console.log(newStory);
-  }
+
+		try {
+      
+    		const createStoryResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/stories/', {
+    			credentials: 'include',
+      			method: 'POST',
+    			body: JSON.stringify(newStory), 
+    			headers: {
+        			'Content-Type': 'application/json'
+        		}
+    		})
+
+      		const createStoryJson = await createStoryResponse.json()
+      		console.log("createStoryJson in createStory() in StoryContainer");
+      		console.log(createStoryJson)
+
+      		//if the status is 201 then we add the new data
+      		if(createStoryResponse.status === 201) {
+        		//getting all stories with spread operator
+        		//(... means all of the stories) and then the one we want to add
+        		this.setState({
+          			stories: [...this.state.stories, createStoryJson.data]
+       			})
+      		}
+
+
+    	} catch(err) {
+      		console.error(err)
+    	}
+  	}
 
 
 	render() {
