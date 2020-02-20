@@ -58,7 +58,7 @@ class LoginRegisterForm extends Component {
 
 
 	render() {
-    	console.log(this.state);
+    	//console.log(this.state);
 		return(
 			<div className="LoginRegisterForm">
         		<h2 className="LoginRegisterForm-action">{this.state.action + " here"}</h2>

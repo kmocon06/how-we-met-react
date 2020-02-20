@@ -26,10 +26,16 @@ class EditStoryModal extends React.Component {
     	})
   	}
 
+  	handleSubmit = (event) => {
+    	event.preventDefault()
+    	
+    	this.props.updateStory(this.state)
+  	}
+
 
 	render() {
-		console.log('props in EditStoryModal')
-		console.log(this.props)
+		//console.log('props in EditStoryModal')
+		//console.log(this.props)
 
 		return (
 			<div>

@@ -136,6 +136,37 @@ class StoryContainer extends React.Component {
     	})
   	}
 
+  	//UPDATE story
+  	//GET /id
+  	updateStory = async (newStoryInfo) => {
+    	// id of dog we need is in state
+    	console.log("updateStory in StoryContainer")
+    	console.log(newStoryInfo)
+
+    	try {
+    		const updateStoryResponse = await fetch(
+      			process.env.REACT_APP_API_URL + "/api/v1/stories/" + this.state.idOfStoryToEdit, 
+      			{
+      				credentials: 'include',
+        			method: 'PUT',
+        			body: JSON.stringify(newStoryInfo), 
+        			headers: {
+          				'Content-Type': 'application/json'
+        			}
+      			}
+    		)
+    		console.log("response from updateStory in StoryContainer")
+    		console.log(updateStoryResponse)
+
+    		const updateStoryJson = await updateStoryResponse.json()
+    		console.log("updateStoryJson")
+    		console.log(updateStoryJson)
+
+    	} catch(err) {
+    		console.log(err)
+    	}
+	}
+
 
 	render() {
 		console.log(this.state)
@@ -151,6 +182,7 @@ class StoryContainer extends React.Component {
           		? 
           		<EditStoryModal 
           			storyToEdit={this.state.stories.find((story) => story.id === this.state.idOfStoryToEdit)}
+          			updateStory={this.updateStory}
           		/>
           		:
           		null
