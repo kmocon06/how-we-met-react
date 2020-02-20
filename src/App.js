@@ -87,6 +87,46 @@ class App extends Component {
     }
   }
 
+  logout = async () => {
+    console.log("logout() in App.js +");
+    const logoutUrl = process.env.REACT_APP_API_URL + '/api/v1/users/logout' 
+
+    try {
+      //get response and fetch call
+      const logoutResponse = await fetch(logoutUrl, {
+        credentials: 'include',
+        //POST 
+        method: 'GET',
+        //turn body into JSON
+        body: JSON.stringify(),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      console.log(logoutResponse)
+
+      //get the json from the reponse
+      const logoutJson = await logoutResponse.json()
+      console.log(logoutJson)
+      console.log(logoutJson.data)
+
+
+      if(logoutResponse.status === 200) {
+        this.setState({
+          loggedIn: false,
+          loggedInUsername: null
+        })
+      }
+
+    } catch (err) {
+      if(err) {
+        console.error(err)
+      }
+    }
+
+  }
+
   render() {
 
     //console.log(process.env);
@@ -97,7 +137,13 @@ class App extends Component {
         <h1>How We Met</h1>
         {
           this.state.loggedIn 
-          ? <StoryContainer />
+          ? 
+          <div>
+            <nav>
+              <button onClick={this.logout}>Logout</button>
+            </nav>
+          <StoryContainer />
+          </div>
           : <LoginRegisterForm 
             register={this.register}
             login={this.login}
