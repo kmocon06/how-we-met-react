@@ -149,7 +149,9 @@ class StoryContainer extends React.Component {
 			 {
           		this.state.idOfStoryToEdit !== -1 
           		? 
-          		<EditStoryModal />
+          		<EditStoryModal 
+          			storyToEdit={this.state.stories.find((story) => story.id === this.state.idOfStoryToEdit)}
+          		/>
           		:
           		null
         	}

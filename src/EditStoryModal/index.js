@@ -11,7 +11,19 @@ class EditStoryModal extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+
+		this.setState({
+			title: this.props.storyToEdit.title,
+			content: this.props.storyToEdit.content,
+			image: this.props.storyToEdit.image
+		})
+	}
+
 	render() {
+		console.log('props in EditStoryModal')
+		console.log(this.props)
+
 		return (
 			<div>
 	    		<h4>Edit your love story:</h4>
