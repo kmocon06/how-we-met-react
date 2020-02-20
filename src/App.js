@@ -40,6 +40,13 @@ class App extends Component {
       console.log(registerJson)
       console.log(registerJson.data)
 
+      if(registerResponse.status === 201) {
+        this.setState({
+          loggedIn: true,
+          loggedInUsername: registerJson.data.username
+        })
+      }
+
     } catch (err) {
       if(err) {
         console.error(err)
@@ -71,7 +78,6 @@ class App extends Component {
       const loginJson = await loginResponse.json()
       console.log(loginJson)
       console.log(loginJson.data)
-
 
       if(loginResponse.status === 200) {
         this.setState({
