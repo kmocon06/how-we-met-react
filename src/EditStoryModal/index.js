@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, TextArea, Form, Modal, Header } from 'semantic-ui-react'
 
 class EditStoryModal extends React.Component {
 	constructor(props) {
@@ -28,7 +29,7 @@ class EditStoryModal extends React.Component {
 
   	handleSubmit = (event) => {
     	event.preventDefault()
-    	
+
     	this.props.updateStory(this.state)
   	}
 
@@ -38,33 +39,38 @@ class EditStoryModal extends React.Component {
 		//console.log(this.props)
 
 		return (
-			<div>
-	    		<h4>Edit your love story:</h4>
-	    		<form onSubmit={this.handleSubmit}>
+			<Modal open={true}>
+	    		<Header>Edit your love story:</Header>
+	    		<Modal.Content>
+	    		<Form onSubmit={this.handleSubmit}>
 	        		<p>Title:</p>
-	        		<input 
+	        		<Form.Input 
 	            		type="text"
 	            		name="title"
 	            		value={this.state.title}
 	            		onChange={this.handleChange}
 	          		/>
 	          		<p>Story:</p>
-	          		<input 
+	          		<TextArea 
 	            		type="text"
 	            		name="content"
+	            		style={{ minHeight: 100, minWidth: 300 }}
 	            		value={this.state.content}
 	            		onChange={this.handleChange}
 	          		/>          
 	          		<p>Image:</p>
-	          		<input 
+	          		<Form.Input 
 	            		type="file"
 	            		name="image"
 	            		value={this.state.image}
 	            		onChange={this.handleChange}
 	          		/>
-	          		<button type="Submit">Edit Story</button>
-	        	</form>
-	      	</div>
+	          		<Modal.Actions>
+	          		<Button type="Submit">Edit Story</Button>
+	          		</Modal.Actions>
+	        	</Form>
+	        	</Modal.Content>
+	        	</Modal>
 		)	
 	}
 }

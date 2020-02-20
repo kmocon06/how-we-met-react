@@ -2,6 +2,7 @@ import React from 'react'
 import StoryList from '../StoryList'
 import NewStoryForm from '../NewStoryForm'
 import EditStoryModal from '../EditStoryModal'
+import { Container } from 'semantic-ui-react'
 
 class StoryContainer extends React.Component {
 	constructor(props) {
@@ -20,6 +21,7 @@ class StoryContainer extends React.Component {
 		this.getStories()
 	}
 
+  //get all of the user stories
 	getStories = async () => {
 		try {
 			//response from the request
@@ -35,13 +37,34 @@ class StoryContainer extends React.Component {
 
 			this.setState({
         		stories: storiesJson.data
-      		})
+      })
 
 
 		} catch(err) {
 			console.log(err);
 		}
 	}
+
+  //get all the other stories besides just user
+  getAllStories = async () => {
+    try {
+      const allStoriesResponse = await fetch(process.env.REACT_APP_API_URL + "/api/v1/all_stories/", {
+        credentials: 'include'
+      })
+
+      const allStoriesJson = await allStoriesResponse.json()
+
+      this.setState({
+            allStories: allStoriesJson.data
+      })
+
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+
+
 
 	//CREATE story
 	//POST
@@ -51,13 +74,13 @@ class StoryContainer extends React.Component {
 
 		try {
       
-    		const createStoryResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/stories/', {
-    			credentials: 'include',
-      			method: 'POST',
+        const createStoryResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/stories/', {
+    		  credentials: 'include',
+      	  method: 'POST',
     			body: JSON.stringify(newStory), 
     			headers: {
-        			'Content-Type': 'application/json'
-        		}
+        		'Content-Type': 'application/json'
+        	}
     		})
 
       		const createStoryJson = await createStoryResponse.json()
@@ -179,6 +202,9 @@ class StoryContainer extends React.Component {
         		this.setState({
           			stories: newArrayWithUpdatedStory
         		})
+
+            //close modal after updating
+            this.closeModal()
         	}
 
     	} catch(err) {
@@ -186,26 +212,35 @@ class StoryContainer extends React.Component {
     	}
     }
 
+  closeModal = () => {
+    this.setState({
+      idOfStoryToEdit: -1
+    })
+  }
+
 
 	render() {
 		console.log(this.state)
 
 		return(
 			<React.Fragment>
-			<h4>Story Container</h4>
-			<StoryList stories={this.state.stories} 
-			deleteStory={this.deleteStory} editStory={this.editStory}/>
-			<NewStoryForm createStory={this.createStory}/>
-			 {
+        <Container>
+    			<h4>Story Container</h4>
+    			<StoryList stories={this.state.stories} 
+    			deleteStory={this.deleteStory} editStory={this.editStory}/>
+    			<NewStoryForm createStory={this.createStory}/>
+    			 {
           		this.state.idOfStoryToEdit !== -1 
           		? 
           		<EditStoryModal 
           			storyToEdit={this.state.stories.find((story) => story.id === this.state.idOfStoryToEdit)}
           			updateStory={this.updateStory}
+                closeModal={this.closeModal}
           		/>
           		:
           		null
-        	}
+        	 }
+        </Container>
 			</React.Fragment>
 		)
 	}

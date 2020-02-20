@@ -1,12 +1,15 @@
 import React from 'react'
 
 function StoryList(props) {
-	//loop through all of the stories
+	//loop through all of the stories 
 	const stories = props.stories.map((story) => {
     	return (
         <div>
-        <li key={story.id}>
-    	   Title: {story.title} by {story.user_id.username}
+        <li key={story.content}>
+    	   <p>Title: {story.title} </p>
+         <p>Story: 
+         {story.content} </p>
+         by {story.user_id.username}
         </li>
         <button onClick={() => props.deleteStory(story.id)}>Delete</button>
         <button onClick={() => props.editStory(story.id)}>Edit</button>

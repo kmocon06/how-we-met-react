@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button, TextArea, Form } from 'semantic-ui-react'
 
 
 class NewStoryForm extends Component {
@@ -48,7 +49,7 @@ class NewStoryForm extends Component {
 	    return(
 	    	<div>
 	    		<h4>Add a new love story:</h4>
-	    		<form onSubmit={this.handleSubmit}>
+	    		<Form onSubmit={this.handleSubmit}>
 	        		<p>Title:</p>
 	        		<input 
 	            		type="text"
@@ -57,12 +58,12 @@ class NewStoryForm extends Component {
 	            		onChange={this.handleChange}
 	          		/>
 	          		<p>Story:</p>
-	          		<input 
+	          		<TextArea 
 	            		type="text"
 	            		name="content"
 	            		value={this.state.content}
 	            		onChange={this.handleChange}
-	          		/>          
+	          		/>         
 	          		<p>Image:</p>
 	          		<input 
 	            		type="file"
@@ -70,8 +71,8 @@ class NewStoryForm extends Component {
 	            		value={this.state.image}
 	            		onChange={this.handleChange}
 	          		/>
-	          		<button type="Submit">Create Story</button>
-	        	</form>
+	          		<Button type="Submit">Create Story</Button>
+	        	</Form>
 	      	</div>
 	    )
 	}

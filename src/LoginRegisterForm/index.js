@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import { Button } from 'semantic-ui-react'
 
 class LoginRegisterForm extends Component {
 	constructor(props) {
@@ -10,7 +10,8 @@ class LoginRegisterForm extends Component {
 			email: '',
 			username: '',
 			password: '',
-			action: 'login'
+			message: '',
+			action: 'login',
 		}
 	}
 
@@ -49,6 +50,10 @@ class LoginRegisterForm extends Component {
     	if(this.state.action === "register") {
 
       		this.props.register(this.state)
+
+      		//if we are trying to register, but the username or email 
+      		//already exists then there should be an error message
+      		
       	//otherwise we should just be able to login
     	} else {
 
@@ -107,16 +112,16 @@ class LoginRegisterForm extends Component {
 							onChange={this.handleChange}
 						/>
 					</div>
-				<button type="Submit">{this.state.action === "register" ? "Register" : "Login"}</button>
+				<Button type="Submit">{this.state.action === "register" ? "Register" : "Login"}</Button>
 				</form>
 				{
           		this.state.action === "register"
           		?
-          		//register
-          		<small>Already a user? Log in <span className="fake-link" onClick={this.switchForm}>here</span>.</small>
+          		//switch to login when you click on button 
+          		<small>Already a user? <button className="login-button" onClick={this.switchForm}>Login</button></small>
           		:
-          		//login
-          		<small>Not a user? Sign up <span className="fake-link" onClick={this.switchForm}>here</span>!</small>
+          		//switch to register when you click on button 
+          		<small>Not a user? <button className="signup-button" onClick={this.switchForm}>Sign Up</button></small>
         		}
 			</div>
 		)

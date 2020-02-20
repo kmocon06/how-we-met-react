@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import LoginRegisterForm from './LoginRegisterForm'
 import StoryContainer from './StoryContainer'
+import { Button } from 'semantic-ui-react'
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
     //logged in username = null because no username is logged in yet
     this.state = {
       loggedIn: false,
-      loggedInUsername: null
+      loggedInUsername: null,
     }
   }
 
@@ -50,6 +51,10 @@ class App extends Component {
     } catch (err) {
       if(err) {
         console.error(err)
+
+        this.setState({
+          message: 'There is already a user with this account'
+        })
       }
     }
   }
@@ -146,7 +151,7 @@ class App extends Component {
           ? 
           <div>
             <nav>
-              <button onClick={this.logout}>Logout</button>
+              <Button onClick={this.logout}>Logout</Button>
             </nav>
           <StoryContainer />
           </div>
@@ -155,6 +160,7 @@ class App extends Component {
             login={this.login}
           />
         }
+        <small className="background">CSS background by Manuel Pinto: https://manuelpinto.in</small>
       </div>
     )
   }
