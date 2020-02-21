@@ -2,7 +2,7 @@ import React from 'react'
 import StoryList from '../StoryList'
 import NewStoryForm from '../NewStoryForm'
 import EditStoryModal from '../EditStoryModal'
-import { Container } from 'semantic-ui-react'
+import { Container, Header, Button } from 'semantic-ui-react'
 
 class StoryContainer extends React.Component {
 	constructor(props) {
@@ -10,7 +10,8 @@ class StoryContainer extends React.Component {
 
 		this.state = {
 			stories: [],
-			idOfStoryToEdit: -1
+			idOfStoryToEdit: -1,
+      newFormModalOpen: false
 		}
 	}
 
@@ -94,6 +95,9 @@ class StoryContainer extends React.Component {
         		this.setState({
           			stories: [...this.state.stories, createStoryJson.data]
        			})
+
+            this.closeNewFormModal()
+
       		}
 
 
@@ -212,9 +216,21 @@ class StoryContainer extends React.Component {
     	}
     }
 
-  closeModal = () => {
+  closeEditModal = () => {
     this.setState({
-      idOfStoryToEdit: -1
+      idOfStoryToEdit: -1,
+    })
+  }
+
+  openNewFormModal = () => {
+    this.setState({
+      newFormModalOpen: true,
+    })
+  }
+
+  closeNewFormModal = () => {
+    this.setState({
+      newFormModalOpen: false,
     })
   }
 
@@ -225,17 +241,25 @@ class StoryContainer extends React.Component {
 		return(
 			<React.Fragment>
         <Container>
-    			<h4>Story Container</h4>
+          <Header>
+            <nav className="Navbar">
+            <Button className="CreateButton" onClick={this.openNewFormModal}>Create New Story</Button>
+            </nav>
+          </Header>
     			<StoryList stories={this.state.stories} 
     			deleteStory={this.deleteStory} editStory={this.editStory}/>
-    			<NewStoryForm createStory={this.createStory}/>
+    			 <NewStoryForm 
+            createStory={this.createStory} 
+            newFormModalOpen={this.state.newFormModalOpen}
+            closeNewFormModal={this.closeNewFormModal}
+            />
     			 {
           		this.state.idOfStoryToEdit !== -1 
           		? 
           		<EditStoryModal 
           			storyToEdit={this.state.stories.find((story) => story.id === this.state.idOfStoryToEdit)}
           			updateStory={this.updateStory}
-                closeModal={this.closeModal}
+                closeEditModal={this.closeEditModal}
           		/>
           		:
           		null

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import LoginRegisterForm from './LoginRegisterForm'
 import StoryContainer from './StoryContainer'
-import { Button } from 'semantic-ui-react'
+import { Button, Message } from 'semantic-ui-react'
+
 
 class App extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       loggedInUsername: null,
+      message: ''
     }
   }
 
@@ -44,18 +46,16 @@ class App extends Component {
       if(registerResponse.status === 201) {
         this.setState({
           loggedIn: true,
-          loggedInUsername: registerJson.data.username
+          loggedInUsername: registerJson.data.username,
+          message: ''
         })
-      }
-
-    } catch (err) {
-      if(err) {
-        console.error(err)
-
+      } else {
         this.setState({
-          message: 'There is already a user with this account'
+          message: 'A user with that username or email already exists'
         })
       }
+    } catch (err) {
+        console.error(err)
     }
   }
 
@@ -87,8 +87,11 @@ class App extends Component {
       if(loginResponse.status === 200) {
         this.setState({
           loggedIn: true,
-          loggedInUsername: loginJson.data.username
+          loggedInUsername: loginJson.data.username,
+          message: ''
         })
+      } else {
+        this.setState({message: 'Invalid username or password'})
       }
 
     } catch (err) {
@@ -128,7 +131,7 @@ class App extends Component {
           loggedIn: false,
           loggedInUsername: null
         })
-      }
+      } 
 
     } catch (err) {
       if(err) {
@@ -145,20 +148,26 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>How We Met</h1>
+        <h1 className="HowWeMet">How We Met</h1>
+        <p className='message'>{this.state.message}</p>
         {
           this.state.loggedIn 
           ? 
           <div>
+            <p>{this.state.loggedInUsername} is logged in</p>
             <nav>
               <Button onClick={this.logout}>Logout</Button>
             </nav>
-          <StoryContainer />
+              <StoryContainer />
           </div>
-          : <LoginRegisterForm 
+          : 
+          <div>
+        <p className="HowWeMet">An app created to tell your love story</p>
+          <LoginRegisterForm 
             register={this.register}
             login={this.login}
           />
+          </div>
         }
         <small className="background">CSS background by Manuel Pinto: https://manuelpinto.in</small>
       </div>

@@ -1,9 +1,20 @@
 
 .App {
-	text-align: left;
 	font-weight: bold;
 }
 
+.HowWeMet {
+	text-align: center;
+}
+
+
+.message {
+	color: white;
+	text-align: center;
+	position: fixed;
+	bottom: 55%;
+	margin-left: 320px;
+}
 
 body {
   text-align: left;

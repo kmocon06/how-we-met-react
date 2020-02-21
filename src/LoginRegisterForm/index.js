@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button } from 'semantic-ui-react'
+import { Button, Grid, Form } from 'semantic-ui-react'
 
 class LoginRegisterForm extends Component {
 	constructor(props) {
@@ -65,9 +65,11 @@ class LoginRegisterForm extends Component {
 	render() {
     	//console.log(this.state);
 		return(
+			<Grid textAlign='center' verticalAlign='middle' style={{ height: '100vh'}}>
+			<Grid.Column style={{maxWidth: 450}}>
 			<div className="LoginRegisterForm">
         		<h2 className="LoginRegisterForm-action">{this.state.action + " here"}</h2>
-				<form onSubmit={this.handleSubmit}>
+				<Form onSubmit={this.handleSubmit}>
 					{
             			this.state.action === "register"
             			?
@@ -113,7 +115,7 @@ class LoginRegisterForm extends Component {
 						/>
 					</div>
 				<Button type="Submit">{this.state.action === "register" ? "Register" : "Login"}</Button>
-				</form>
+				</Form>
 				{
           		this.state.action === "register"
           		?
@@ -124,6 +126,8 @@ class LoginRegisterForm extends Component {
           		<small>Not a user? <button className="signup-button" onClick={this.switchForm}>Sign Up</button></small>
         		}
 			</div>
+			</Grid.Column>
+        	</Grid>
 		)
 	}
 }

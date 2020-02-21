@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, TextArea, Form } from 'semantic-ui-react'
+import { Button, TextArea, Form, Header, Modal } from 'semantic-ui-react'
 
 
 class NewStoryForm extends Component {
@@ -48,10 +48,14 @@ class NewStoryForm extends Component {
 
 	    return(
 	    	<div>
+	    	<Modal open={this.props.newFormModalOpen} closeIcon={true} onClose={this.props.closeNewFormModal} >
+	    		<Modal.Content>
+	    		<Header>
 	    		<h4>Add a new love story:</h4>
+	        	</Header>
 	    		<Form onSubmit={this.handleSubmit}>
 	        		<p>Title:</p>
-	        		<input 
+	        		<Form.Input 
 	            		type="text"
 	            		name="title"
 	            		value={this.state.title}
@@ -65,15 +69,19 @@ class NewStoryForm extends Component {
 	            		onChange={this.handleChange}
 	          		/>         
 	          		<p>Image:</p>
-	          		<input 
+	          		<Form.Input 
 	            		type="file"
 	            		name="image"
 	            		value={this.state.image}
 	            		onChange={this.handleChange}
 	          		/>
+	          		<Modal.Actions>
 	          		<Button type="Submit">Create Story</Button>
+	          		</Modal.Actions>
 	        	</Form>
-	      	</div>
+	        	</Modal.Content>
+	        	</Modal>
+	        </div>
 	    )
 	}
 }

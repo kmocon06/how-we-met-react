@@ -38,7 +38,7 @@ class EditStoryModal extends React.Component {
 		//console.log(this.props)
 
 		return (
-			<Modal open={true} onClose={(e)=>{this.props.closeModal()}} closeIcon>
+			<Modal open={true} onClose={(e)=>{this.props.closeEditModal()}} closeIcon>
 	    		<Header>Edit your love story:</Header>
 	    		<Modal.Content>
 	    		<Form onSubmit={this.handleSubmit}>
