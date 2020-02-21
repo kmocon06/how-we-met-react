@@ -91,7 +91,9 @@ class App extends Component {
           message: ''
         })
       } else {
-        this.setState({message: 'Invalid username or password'})
+        this.setState({
+          message: 'Invalid username or password'
+        })
       }
 
     } catch (err) {
@@ -129,7 +131,8 @@ class App extends Component {
       if(logoutResponse.status === 200) {
         this.setState({
           loggedIn: false,
-          loggedInUsername: null
+          loggedInUsername: null,
+          message: ''
         })
       } 
 
@@ -169,7 +172,6 @@ class App extends Component {
           />
           </div>
         }
-        <small className="background">CSS background by Manuel Pinto: https://manuelpinto.in</small>
       </div>
     )
   }
