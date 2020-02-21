@@ -20,7 +20,6 @@ class App extends Component {
 
   //register user
   register = async (registerInfo) => {
-    console.log("register() in App.js +", registerInfo);
     const registerUrl = process.env.REACT_APP_API_URL + '/api/v1/users/register'
 
     try {
@@ -36,12 +35,8 @@ class App extends Component {
         }
       })
 
-      console.log(registerResponse)
-
       //get the json from the reponse
       const registerJson = await registerResponse.json()
-      console.log(registerJson)
-      console.log(registerJson.data)
 
       if(registerResponse.status === 201) {
         this.setState({
@@ -77,12 +72,8 @@ class App extends Component {
         }
       })
 
-      console.log(loginResponse)
-
       //get the json from the reponse
       const loginJson = await loginResponse.json()
-      console.log(loginJson)
-      console.log(loginJson.data)
 
       if(loginResponse.status === 200) {
         this.setState({
@@ -104,7 +95,7 @@ class App extends Component {
   }
 
   logout = async () => {
-    console.log("logout() in App.js +");
+
     const logoutUrl = process.env.REACT_APP_API_URL + '/api/v1/users/logout' 
 
     try {
@@ -120,12 +111,9 @@ class App extends Component {
         }
       })
 
-      console.log(logoutResponse)
 
       //get the json from the reponse
       const logoutJson = await logoutResponse.json()
-      console.log(logoutJson)
-      console.log(logoutJson.data)
 
 
       if(logoutResponse.status === 200) {
@@ -145,10 +133,6 @@ class App extends Component {
   }
 
   render() {
-
-    //console.log(process.env);
-    //console.log(this.state)
-
     return (
       <div className="App">
         <h1 className="HowWeMet">How We Met</h1>
