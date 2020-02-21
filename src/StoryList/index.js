@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 function StoryList(props) {
 	//loop through all of the stories 
 	const stories = props.stories.map((story) => {
@@ -7,7 +8,7 @@ function StoryList(props) {
         <div className='ui celled list'>
         <li key={story.content}>
     	   <p>Title: {story.title} </p>
-         <p>Story: 
+         <p> 
           {story.content} </p>
          by {story.user_id.username}
         </li>

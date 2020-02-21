@@ -3,6 +3,7 @@ import StoryList from '../StoryList'
 import NewStoryForm from '../NewStoryForm'
 import EditStoryModal from '../EditStoryModal'
 import { Container, Header, Button } from 'semantic-ui-react'
+import './index.css'
 
 class StoryContainer extends React.Component {
 	constructor(props) {
@@ -241,11 +242,9 @@ class StoryContainer extends React.Component {
 		return(
 			<React.Fragment>
         <Container>
-          <Header>
-            <nav className="Navbar">
-            <Button className="CreateButton" onClick={this.openNewFormModal}>Create New Story</Button>
-            </nav>
-          </Header>
+            <Header className="ButtonHeader">
+            <Button className="Button" onClick={this.openNewFormModal}>Create New Story</Button>
+            </Header>
     			<StoryList stories={this.state.stories} 
     			deleteStory={this.deleteStory} editStory={this.editStory}/>
     			 <NewStoryForm 

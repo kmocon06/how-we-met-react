@@ -1,0 +1,6 @@
+.Button {
+	position:absolute;
+    transition: .5s ease;
+    top: 10%;
+    left: 40%;
+}
