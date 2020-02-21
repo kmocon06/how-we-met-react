@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import { Button, Grid, Form } from 'semantic-ui-react'
+import { Button, Grid, Form, Input, Icon } from 'semantic-ui-react'
+import './index.css'
 
 class LoginRegisterForm extends Component {
 	constructor(props) {
@@ -96,7 +97,8 @@ class LoginRegisterForm extends Component {
 				        :
 				        null
 				    }
-					<div>
+					<div className="ui icon input">
+						<i className="user basic icon"></i>
 						<input
 							type="text"
 							name="username"
@@ -105,7 +107,8 @@ class LoginRegisterForm extends Component {
 							onChange={this.handleChange}
 						/>
 					</div>
-					<div>
+					<div className="ui icon input">
+						<i class="lock icon"></i>
 						<input
 							type="password"
 							name="password"
